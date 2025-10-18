@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const telegraf_1 = require("telegraf");
+const config_1 = require("./config");
+const bot = new telegraf_1.Telegraf(config_1.config.botToken);
+bot.start((ctx) => ctx.reply('Привет! Я твой Telegram-бот.'));
+bot.on('text', (ctx) => ctx.reply(`Ты сказал: ${ctx.message.text}`));
+bot.launch();
+process.once('SIGINT', () => bot.stop());
+process.once('SIGTERM', () => bot.stop());
